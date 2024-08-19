@@ -12,9 +12,7 @@ const NoteDetail = ({ updateNote, updateNoteImage }) => {
         status: '',
         photoUrl: ''
     });
-
     const { id } = useParams();
-
     const fetchNote = async (id) => {
         try {
             const { data } = await getNote(id);
@@ -23,11 +21,9 @@ const NoteDetail = ({ updateNote, updateNoteImage }) => {
             toastError(error.message);
         }
     };
-
     const selectImage = () => {
         inputRef.current.click();
     };
-
     const updatePhoto = async (file) => {
         try {
             const formData = new FormData();
@@ -40,22 +36,18 @@ const NoteDetail = ({ updateNote, updateNoteImage }) => {
             toastError(error.message);
         }
     };
-
     const onChange = (event) => {
         setNote({ ...note, [event.target.name]: event.target.value });
     };
-
     const onUpdateNote = async (event) => {
         event.preventDefault();
         await updateNote(note);
         fetchNote(id);
         toastSuccess('Note Updated');
     };
-
     useEffect(() => {
         fetchNote(id);
     }, [id]);
-
     return (
         <>
             <Link to='/notes' className='link'><i className='bi bi-arrow-left'></i> Back to list</Link>
