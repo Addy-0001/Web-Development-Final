@@ -14,11 +14,11 @@ export async function getNote(id) {
     return await axios.get(`${API_URL}/${id}`);
 }
 
-export async function udpateNote(note) {
+export async function updateNote(note) {
     return await axios.post(API_URL, note);
 }
 
-export async function udpatePhoto(formData) {
+export async function updateNotePhoto(formData) {
     return await axios.put(`${API_URL}/photo`, formData);
 }
 

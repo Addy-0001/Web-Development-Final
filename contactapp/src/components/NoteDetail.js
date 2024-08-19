@@ -3,7 +3,7 @@ import { Link, useParams } from 'react-router-dom';
 import { getNote } from '../api/NoteService';
 import { toastError, toastSuccess } from '../api/ToastService';
 
-const NoteDetail = ({ updateNote, updateImage }) => {
+const NoteDetail = ({ updateNote, updateNoteImage }) => {
     const inputRef = useRef();
     const [note, setNote] = useState({
         id: '',
@@ -19,10 +19,7 @@ const NoteDetail = ({ updateNote, updateImage }) => {
         try {
             const { data } = await getNote(id);
             setNote(data);
-            console.log(data);
-            //toastSuccess('Note retrieved');
         } catch (error) {
-            console.log(error);
             toastError(error.message);
         }
     };
@@ -31,16 +28,15 @@ const NoteDetail = ({ updateNote, updateImage }) => {
         inputRef.current.click();
     };
 
-    const udpatePhoto = async (file) => {
+    const updatePhoto = async (file) => {
         try {
             const formData = new FormData();
             formData.append('file', file, file.name);
             formData.append('id', id);
-            await updateImage(formData);
+            await updateNoteImage(formData);
             setNote((prev) => ({ ...prev, photoUrl: `${prev.photoUrl}?updated_at=${new Date().getTime()}` }));
             toastSuccess('Photo updated');
         } catch (error) {
-            console.log(error);
             toastError(error.message);
         }
     };
@@ -51,70 +47,56 @@ const NoteDetail = ({ updateNote, updateImage }) => {
 
     const onUpdateNote = async (event) => {
         event.preventDefault();
-        await updateNote(note);        
+        await updateNote(note);
         fetchNote(id);
         toastSuccess('Note Updated');
     };
 
     useEffect(() => {
         fetchNote(id);
-    }, []);
+    }, [id]);
 
     return (
         <>
-            <Link to={'/notes'} className='link'><i className='bi bi-arrow-left'></i> Back to list</Link>
-            <div className='profile'>
-                <div className='profile__details'>
-                    <img src={note.photoUrl} alt={`Profile photo of ${note.name}`} />
-                    <div className='profile__metadata'>
-                        <p className='profile__name'>{note.name}</p>
-                        <p className='profile__muted'>JPG, GIF, or PNG. Max size of 10MG</p>
+            <Link to='/notes' className='link'><i className='bi bi-arrow-left'></i> Back to list</Link>
+            <div className='note__profile'>
+                <div className='note__profile-details'>
+                    <img src={note.photoUrl} alt={`Note titled ${note.title}`} />
+                    <div className='note__metadata'>
+                        <p className='note__name'>{note.title}</p>
+                        <p className='note__muted'>JPG, GIF, or PNG. Max size of 10MB</p>
                         <button onClick={selectImage} className='btn'><i className='bi bi-cloud-upload'></i> Change Photo</button>
                     </div>
                 </div>
-                <div className='profile__settings'>
-                    <div>
-                        <form onSubmit={onUpdateNote} className="form">
-                            <div className="user-details">
-                                <input type="hidden" defaultValue={note.id} name="id" required />
-                                <div className="input-box">
-                                    <span className="details">Name</span>
-                                    <input type="text" value={note.name} onChange={onChange} name="name" required />
-                                </div>
-                                <div className="input-box">
-                                    <span className="details">Email</span>
-                                    <input type="text" value={note.email} onChange={onChange} name="email" required />
-                                </div>
-                                <div className="input-box">
-                                    <span className="details">Phone</span>
-                                    <input type="text" value={note.phone} onChange={onChange} name="phone" required />
-                                </div>
-                                <div className="input-box">
-                                    <span className="details">Address</span>
-                                    <input type="text" value={note.address} onChange={onChange} name="address" required />
-                                </div>
-                                <div className="input-box">
-                                    <span className="details">Title</span>
-                                    <input type="text" value={note.title} onChange={onChange} name="title" required />
-                                </div>
-                                <div className="input-box">
-                                    <span className="details">Status</span>
-                                    <input type="text" value={note.status} onChange={onChange} name="status" required />
-                                </div>
+                <div className='note__settings'>
+                    <form onSubmit={onUpdateNote} className="form">
+                        <div className="note-details">
+                            <input type="hidden" defaultValue={note.id} name="id" required />
+                            <div className="input-box">
+                                <span className="details">Title</span>
+                                <input type="text" value={note.title} onChange={onChange} name="title" required />
                             </div>
-                            <div className="form_footer">
-                                <button type="submit" className="btn">Save</button>
+                            <div className="input-box">
+                                <span className="details">Content</span>
+                                <textarea value={note.content} onChange={onChange} name="content" required />
                             </div>
-                        </form>
-                    </div>
+                            <div className="input-box">
+                                <span className="details">Status</span>
+                                <input type="text" value={note.status} onChange={onChange} name="status" required />
+                            </div>
+                        </div>
+                        <div className="form_footer">
+                            <button type="submit" className="btn">Save</button>
+                        </div>
+                    </form>
                 </div>
             </div>
 
             <form style={{ display: 'none' }}>
-                <input type='file' ref={inputRef} onChange={(event) => udpatePhoto(event.target.files[0])} name='file' accept='image/*' />
+                <input type='file' ref={inputRef} onChange={(event) => updatePhoto(event.target.files[0])} name='file' accept='image/*' />
             </form>
         </>
-    )
-}
+    );
+};
 
 export default NoteDetail;
