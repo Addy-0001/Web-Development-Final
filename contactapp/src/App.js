@@ -166,7 +166,7 @@ function App() {
 
   return (
     <>
-      <Header toggleContactModal={toggleContactModal} nbOfContacts={contactData?.totalElements || 0} nbOfNotes={noteData?.totalElements || 0} />
+      <Header toggleContactModal={toggleContactModal} toggleNoteModal={toggleNoteModal} nbOfContacts={contactData?.totalElements || 0} nbOfNotes={noteData?.totalElements || 0} />
       <main className='main'>
         <div className='container'>
           <Routes>
