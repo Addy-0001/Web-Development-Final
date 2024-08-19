@@ -30,7 +30,7 @@ public class NoteService {
     private final NoteRepo noteRepo;
 
     public Page<Note> getAllNotes(int page, int size) {
-        return noteRepo.findAll(PageRequest.of(page, size, Sort.by("name")));
+        return noteRepo.findAll(PageRequest.of(page, size, Sort.by("title")));
     }
 
     public Note getNote(String id) {
@@ -42,7 +42,7 @@ public class NoteService {
     }
 
     public void deleteNote(Note note) {
-        // Assignment
+        noteRepo.delete(note);
     }
 
     public String uploadPhoto(String id, MultipartFile file) {

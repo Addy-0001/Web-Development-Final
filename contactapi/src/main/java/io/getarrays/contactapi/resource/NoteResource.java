@@ -33,7 +33,7 @@ public class NoteResource {
     @PostMapping
     public ResponseEntity<Note> createNote(@RequestBody Note note) {
         //return ResponseEntity.ok().body(noteService.createNote(note));
-        return ResponseEntity.created(URI.create("/notes/userID")).body(noteService.createNote(note));
+        return ResponseEntity.created(URI.create("/notes/noteID")).body(noteService.createNote(note));
     }
 
     @GetMapping
