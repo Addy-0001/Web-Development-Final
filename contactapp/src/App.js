@@ -3,10 +3,13 @@ import 'react-toastify/dist/ReactToastify.css';
 import Header from './components/Header'
 import ContactList from './components/ContactList'
 import { getContacts, saveContact, udpatePhoto } from './api/ContactService';
+import { getNotes, saveNote, udpateNote } from './api/NoteService';
 import { Routes, Route, Navigate } from 'react-router-dom';
 import ContactDetail from './components/ContactDetail';
 import { toastError } from './api/ToastService';
 import { ToastContainer } from 'react-toastify';
+import NoteList from './components/NoteList';
+import NoteDetail from './components/NoteDetail';
 
 function App() {
   const modalRef = useRef();
@@ -99,6 +102,8 @@ function App() {
             <Route path='/' element={<Navigate to={'/contacts'} />} />
             <Route path="/contacts" element={<ContactList data={data} currentPage={currentPage} getAllContacts={getAllContacts} />} />
             <Route path="/contacts/:id" element={<ContactDetail updateContact={updateContact} updateImage={updateImage} />} />
+            <Route path="/notes" element={<NoteList data={data} currentPage={currentPage} getAllNotes={getAllContacts} />} />
+            <Route path="/notes/:id" element={<NoteDetail udpateNote={udpateNote} updateImage={updateImage} />} />
           </Routes>
         </div>
       </main>

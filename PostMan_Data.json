@@ -1,0 +1,314 @@
+{
+	"info": {
+		"_postman_id": "b9a62348-cae3-455d-a012-b921b68274e0",
+		"name": "Individual Project",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "31856893"
+	},
+	"item": [
+		{
+			"name": "Notes",
+			"item": [
+				{
+					"name": "Get All Notes",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "127.0.0.1:8080/notes",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8080",
+							"path": [
+								"notes"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create A Note",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"title\" : \"Adamya Note 1\", \n    \"content\" : \"Test Content that contains a note\", \n    \"photoURL\" : \"Test Photo Url here\",\n    \"status\" : \"Active\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "127.0.0.1:8080/notes",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8080",
+							"path": [
+								"notes"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update a Note",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"title\" : \"Adamya Note 1 Updated\", \n    \"content\" : \"Test Updated Content that contains a note\", \n    \"photoURL\" : \"Test UPdated Photo Url here\",\n    \"status\" : \"Active\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "127.0.0.1:8080/notes/0ed18c03-1b67-4954-a48e-6258107403f4",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8080",
+							"path": [
+								"notes",
+								"0ed18c03-1b67-4954-a48e-6258107403f4"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add Photos using Endpoints",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "id",
+									"value": "0ed18c03-1b67-4954-a48e-6258107403f4",
+									"type": "text"
+								},
+								{
+									"key": "file",
+									"type": "file",
+									"src": "/home/addy/Desktop/DSA Assignment/Answer_Images/code-snapshot-7-GUI.png"
+								}
+							]
+						},
+						"url": {
+							"raw": "127.0.0.1:8080/notes/photo",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8080",
+							"path": [
+								"notes",
+								"photo"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete a Note",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "127.0.0.1:8080/notes/5278c378-1c03-40b2-9753-6080bfecf868",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8080",
+							"path": [
+								"notes",
+								"5278c378-1c03-40b2-9753-6080bfecf868"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Contacts",
+			"item": [
+				{
+					"name": "Get All Contacts",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "id",
+									"value": "0b912cfb-1073-47b6-885e-c600a6482bc6",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "127.0.0.1:8080/contacts",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8080",
+							"path": [
+								"contacts"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create A contact",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\" : \"Lionel Messi\",\n    \"email\" : \"messi@gmail.com\", \n    \"title\" : \"Footballer\", \n    \"phone\" : \"123-456-789\", \n    \"address\" : \"Miami, FL\", \n    \"status\" : \"Active\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "127.0.0.1:8080/contacts",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8080",
+							"path": [
+								"contacts"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add Photos",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "id ",
+									"value": "12b803d5-ea3a-4ca2-b727-d84e533a2f07",
+									"type": "text"
+								},
+								{
+									"key": "file",
+									"type": "file",
+									"src": "/home/addy/Desktop/DSA Assignment/Answer_Images/code-snapshot-7-2.png"
+								}
+							]
+						},
+						"url": {
+							"raw": "127.0.0.1:8080/contacts/photo",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8080",
+							"path": [
+								"contacts",
+								"photo"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Contact",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"id\" : \"12b803d5-ea3a-4ca2-b727-d84e533a2f07\",\n    \"name\" : \"Lionel Messi\",\n    \"email\" : \"messi@lionel.com\", \n    \"title\" : \"Footballer\", \n    \"phone\" : \"123-456-766\", \n    \"address\" : \"Miami, FL, Updated\", \n    \"status\" : \"Active\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "127.0.0.1:8080/contacts",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8080",
+							"path": [
+								"contacts"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete a Contact",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "127.0.0.1:8080/contacts/12b803d5-ea3a-4ca2-b727-d84e533a2f07",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8080",
+							"path": [
+								"contacts",
+								"12b803d5-ea3a-4ca2-b727-d84e533a2f07"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

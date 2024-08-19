@@ -5,6 +5,7 @@ import io.getarrays.contactapi.service.NoteService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -52,7 +53,12 @@ public class NoteResource {
         return ResponseEntity.ok().body(noteService.uploadPhoto(id, file));
     }
 
-
+    @DeleteMapping("/{id}")
+    public ResponseEntity<?> deleteNote(@PathVariable(value = "id") String id) {
+        Note note = noteService.getNote(id);
+        noteService.deleteNote(note);
+        return ResponseEntity.ok().build();
+    }
 
     @GetMapping(path = "/image/{filename}", produces = { IMAGE_PNG_VALUE, IMAGE_JPEG_VALUE })
     public byte[] getPhoto(@PathVariable("filename") String filename) throws IOException {

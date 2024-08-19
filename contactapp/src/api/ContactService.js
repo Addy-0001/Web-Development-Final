@@ -24,4 +24,4 @@ export async function udpatePhoto(formData) {
 
 export async function deleteContact(id) {
     return await axios.delete(`${API_URL}/${id}`);
-}
+} 
